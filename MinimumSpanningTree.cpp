@@ -13,7 +13,7 @@ struct Edge {
 int nV, nE;
 vector<vector<Edge>> edgesFrom;
 vector<Edge> edges;
-vector<Edge> mst;
+vector<int> mst;
 
 int main(int argc, char const *argv[]) {
     cin >> nV >> nE;
@@ -25,9 +25,15 @@ int main(int argc, char const *argv[]) {
 void prim(int initial) {
     vector<bool> visited(nV, false);
     visited[initial] = true;
-    int v = initial;
-    for (int _i = 0; _i < nV; _i++) {
-        for (Edge &e: edgesFrom[v])
-        if (visited[e.to] && )
-    }
+    priority_queue<Edge> pq;
+    pq.push({0, -1, initial});
+    while (!pq.empty()) {
+        Edge nearest = pq.top();
+        int v = nearest.to;
+        if (!visited[v]) {
+            mst[v] = nearest.fr;
+            for (Edge &e: edgesFrom[v])
+                if (visited[v]) 
+        }
+    }    
 }

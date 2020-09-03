@@ -84,8 +84,11 @@ void dijkstra_simplified(int s) {
             }
         }
     }
+    for (bool vertexVisited : visited)
+        if (!vertexVisited) exit(1); // Not connected
 }
 
+// Complexity: O(VE)
 bool bellmanFord(int s) {
     dist[s] = 0;
     predecessor[s] = -1;
@@ -100,6 +103,7 @@ bool bellmanFord(int s) {
     return true;
 }
 
+// Complexity: O(kE) with k<5 normally
 bool spfa(int s) {
     dist[s] = 0;
     predecessor[s] = -1;
