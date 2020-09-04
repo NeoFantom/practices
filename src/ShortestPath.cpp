@@ -22,15 +22,6 @@ vector<vector<int>> allDist;
 
 vector<int> predecessor;
 
-int main(int argc, char const *argv[]) {
-    cin >> nV >> nE;
-    edgesFrom.resize(nV);
-    edges.resize(nE);
-    dist.resize(nV);
-    predecessor.resize(nV);
-    return 0;
-}
-
 void dijkstra(int s) {
     dist[s] = 0;
     predecessor[s] = -1;
@@ -164,4 +155,13 @@ void floyd() {
                 if (allDist[from][mid] + allDist[mid][to] < allDist[from][to]) {
                     allDist[from][to] = allDist[from][mid] + allDist[mid][to];
                 }
+}
+
+int main(int argc, char const *argv[]) {
+    cin >> nV >> nE;
+    edgesFrom.resize(nV);
+    edges.resize(nE);
+    dist.resize(nV);
+    predecessor.resize(nV);
+    return 0;
 }

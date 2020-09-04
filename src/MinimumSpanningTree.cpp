@@ -1,8 +1,8 @@
+#include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <queue>
 #include <vector>
-#include <numeric>
-#include <algorithm>
 
 using namespace std;
 
@@ -17,15 +17,6 @@ vector<vector<Edge>> edgesFrom;
 vector<Edge> edges;
 vector<int> predecessor;
 int totalCost;
-
-int main(int argc, char const *argv[]) {
-    cin >> nV >> nE;
-    edgesFrom.resize(nV);
-    edges.resize(nE);
-    predecessor.resize(nV);
-    totalCost = 0;
-    return 0;
-}
 
 void prim(int initial) {
     predecessor[initial] = -1;
@@ -97,4 +88,13 @@ void kruskal(int initial) {
             predecessor[e.to] = rootFrom;
         }
     }
+}
+
+int main(int argc, char const *argv[]) {
+    cin >> nV >> nE;
+    edgesFrom.resize(nV);
+    edges.resize(nE);
+    predecessor.resize(nV);
+    totalCost = 0;
+    return 0;
 }
