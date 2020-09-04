@@ -16,8 +16,10 @@ struct Edge {
 int nV, nE;
 vector<vector<Edge>> edgesFrom;
 vector<Edge> edges;
+
 vector<int> dist;
 vector<vector<int>> allDist;
+
 vector<int> predecessor;
 
 int main(int argc, char const *argv[]) {
@@ -30,6 +32,28 @@ int main(int argc, char const *argv[]) {
 }
 
 void dijkstra(int s) {
+    dist[s] = 0;
+    predecessor[s] = -1;
+    vector<bool> visited(nV, false);
+    visited[s] = true;
+    int v = s;
+    for (int _i = 0; _i < nV; ++_i) {
+        for (Edge &e : edgesFrom[v])
+            if (!visited[e.to] && dist[v] + e.w < dist[e.to]) {
+                dist[e.to] = dist[v] + e.w;
+                predecessor[e.to] = v;
+            }
+        int min = 0x4fffffff;
+        for (int candidate = 0; candidate < nV; ++candidate)
+            if (!visited[candidate] && dist[candidate] < min) {
+                min = dist[candidate];
+                v = candidate;
+            }
+        visited[v] = true;
+    }
+}
+
+void dijkstra_optimized(int s) {
     dist[s] = 0;
     predecessor[s] = -1;
 
@@ -60,6 +84,7 @@ void dijkstra(int s) {
     }
 }
 
+// Simple code structure
 void dijkstra_simplified(int s) {
     dist[s] = 0;
     predecessor[s] = -1;
@@ -74,10 +99,11 @@ void dijkstra_simplified(int s) {
         pq.pop();
         int v = nearest.to;
         if (!visited[v]) {
+            visited[v] = true;
             dist[v] = nearest.w;
             predecessor[v] = nearest.fr;
             for (Edge &e : edgesFrom[v]) {
-                if (!visited[e.to] && dist[e.fr] + e.w < dist[e.to]) {
+                if (/* !visited[e.to] && */ dist[e.fr] + e.w < dist[e.to]) {
                     dist[e.to] = dist[e.fr] + e.w;
                     pq.push(e);
                 }
@@ -85,7 +111,7 @@ void dijkstra_simplified(int s) {
         }
     }
     for (bool vertexVisited : visited)
-        if (!vertexVisited) exit(1); // Not connected
+        if (!vertexVisited) exit(1);  // Not connected
 }
 
 // Complexity: O(VE)

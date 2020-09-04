@@ -1,19 +1,14 @@
 #include <array>
 #include <iostream>
+#include <queue>
 #include <tuple>
 #include <vector>
 
 using namespace std;
 
-typedef tuple<int, int, int> point;
-
-void printPoint(point p) {
-    cout << get<0>(p);
-    ;
-}
-
 int main(int argc, char const *argv[]) {
-    point p(1, 3, 4);
-
+    int a = 1, b = 7;
+    cout << a << endl << sizeof(-2147483648) << endl;
+    std::cout << -9223372036854775808 << '\n'; 
     return 0;
 }
